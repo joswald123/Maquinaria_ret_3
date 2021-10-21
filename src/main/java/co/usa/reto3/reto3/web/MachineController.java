@@ -50,7 +50,7 @@ public class MachineController {
 		return machineService.update(m);
 	}
 	
-	@DeleteMapping("/delete/{id}")
+	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") int id) {
 		machineService.delete(id);
 	}

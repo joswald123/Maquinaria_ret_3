@@ -55,7 +55,7 @@ public class ClientController {
 	}
 	
 	// Delete a client
-	@DeleteMapping("/delete/{idClient}")
+	@DeleteMapping("/{idClient}")
 	public void delete(@PathVariable("idClient") int id) {
 		clientService.delete(id);
 	}

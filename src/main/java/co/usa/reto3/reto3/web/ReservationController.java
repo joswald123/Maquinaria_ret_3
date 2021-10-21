@@ -55,7 +55,7 @@ public class ReservationController {
 	}
 	
 	// DELETE 
-	@DeleteMapping("/delete/{idReservation}")
+	@DeleteMapping("/{idReservation}")
 	public void delete(@PathVariable("idReservation")int id) {
 		reservationService.delete(id);
 	}

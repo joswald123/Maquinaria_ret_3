@@ -55,7 +55,7 @@ public class ScoreController {
 	}
 	
 	// Delete a score
-	@DeleteMapping("/delete/{idScore}")
+	@DeleteMapping("/{idScore}")
 	public void delete(@PathVariable("idScore") int id) {
 		scoreService.delete(id);
 	}

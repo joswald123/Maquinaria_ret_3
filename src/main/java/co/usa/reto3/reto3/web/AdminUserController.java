@@ -55,10 +55,11 @@ public class AdminUserController {
 		}
 		
 		// Delete a score
-		@DeleteMapping("/delete/{idAdminUser}")
+		@DeleteMapping("/{idAdminUser}")
 		public void delete(@PathVariable("idAdminUser") int id) {
 			adminuserService.delete(id);
 		}
+		
 	
 
 }

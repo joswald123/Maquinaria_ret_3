@@ -55,7 +55,7 @@ public class MessagesController {
 	}
 	
 	// Delete a message
-	@DeleteMapping("/delete/{idMessage}")
+	@DeleteMapping("/{idMessage}")
 	public void delete(@PathVariable("idMessage")int id) {
 		messagesService.delete(id);
 	}

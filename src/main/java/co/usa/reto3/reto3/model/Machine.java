@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name="machine")
 public class Machine implements Serializable {
 	
+	// Attributos de la tabla Maquina
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -28,26 +29,30 @@ public class Machine implements Serializable {
 	private Integer year;
 	private String description;
 	
+	// Relaciones entre las tablas Maquina y Categoria 
 	@ManyToOne 
 	@JoinColumn(name="categoryId")
 	@JsonIgnoreProperties({"category", "machines"})
 	public Category category;
 	
+	// Relaciones entre las tablas Maquina y Mensajes
 	@OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "machine")
 	@JsonIgnoreProperties({"messages","machine", "client"})
 	public List<Message> messages;
 	
+	// Relaciones entre las tablas Maquina y Reservaciones
 	@OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "machine")
 	@JsonIgnoreProperties({"reservations"})
 	public List<Reservation> reservations;
 	
 	
-	
+	// Constructor vacio
 	public Machine() {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	
+	// Getters a& Setters para la tabla Maquina 
 	public Integer getId() {
 		return id;
 	}
@@ -135,7 +140,7 @@ public class Machine implements Serializable {
 	}
 	
 	
-	
+	// String Override
 	@Override
 	public String toString() {
 		return "Machine [id=" + id + ", name=" + name + ", brand=" + brand + ", year=" + year + ", description="
