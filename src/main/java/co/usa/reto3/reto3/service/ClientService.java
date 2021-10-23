@@ -37,12 +37,25 @@ public class ClientService {
 	
 	// Update CRUD
 	public Client update(Client c) {
-		Optional<Client> clientAux = clientRepository.getClient(c.getIdClient());
-		if (clientAux != null) {
-			return clientRepository.save(c);
-		} else {
-			return c;
+		if(c.getIdClient() !=null) {
+			Optional<Client> cAux = clientRepository.getClient(c.getIdClient());
+			if(!cAux.isEmpty()) {
+				if(c.getEmail() != null) {
+					cAux.get().setEmail(c.getEmail());
+				}
+				if(c.getPassword() != null) {
+					cAux.get().setPassword(c.getPassword());
+				}
+				if(c.getName() != null) {
+					cAux.get().setName(c.getName());
+				}
+				if(c.getAge() != null) {
+					cAux.get().setAge(c.getAge());
+				}
+				return clientRepository.save(cAux.get());
+			}
 		}
+		return c;
 	}
 
 	// DELETE CRUD

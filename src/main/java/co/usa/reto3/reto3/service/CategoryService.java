@@ -40,18 +40,28 @@ public class CategoryService {
 	}
 	
 	// Update CRUD
-	public Category update(Category m) {
-		Optional<Category> cAux = categoryRepository.getCategory(m.getId());
-		if (cAux != null) {
-			return categoryRepository.update(m);
-		} else {
-			return m;
+	public Category update(Category c) {
+		if (c.getId() != null) {
+			Optional<Category> cAux = categoryRepository.getCategory(c.getId());
+			if(!cAux.isEmpty()) {
+				if(c.getName() != null) {
+					cAux.get().setName(c.getName());
+				}
+				if(c.getDescription()!= null) {
+					cAux.get().setDescription(c.getDescription());
+				}
+				return categoryRepository.save(cAux.get());
+			}
 		}
+		return c;
 	}
+	
+  
 	
 	// DELETE CRUD
 	public void delete(int id) {
 		categoryRepository.delete(id);
 	}
+
 
 }

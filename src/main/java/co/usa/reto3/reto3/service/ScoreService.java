@@ -41,12 +41,16 @@ public class ScoreService {
 	
 	// PUT CRUD
 	public Score update(Score s) {
-		Optional<Score> scoreAux = scoreRepository.getScore(s.getIdScore());
-		if (scoreAux != null) {
-			return scoreRepository.save(s);
-		} else {
-			return s;
+		if(s.getIdScore() != null) {
+			Optional<Score> sAux=scoreRepository.getScore(s.getIdScore());
+			if(!sAux.isEmpty()) {
+				if(s.getScore() != null) {
+					sAux.get().setScore(s.getScore());
+				}
+				return scoreRepository.save(sAux.get());
+			}
 		}
+		return s;
 	}
 
 	

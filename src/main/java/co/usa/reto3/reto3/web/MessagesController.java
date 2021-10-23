@@ -49,13 +49,14 @@ public class MessagesController {
 	
 	// Put a message
 	@PutMapping("/update")
-	@ResponseStatus(HttpStatus.ACCEPTED)
+	@ResponseStatus(HttpStatus.CREATED)
 	public Message update(@RequestBody Message m) {
 		return messagesService.update(m);
 	}
 	
 	// Delete a message
 	@DeleteMapping("/{idMessage}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("idMessage")int id) {
 		messagesService.delete(id);
 	}

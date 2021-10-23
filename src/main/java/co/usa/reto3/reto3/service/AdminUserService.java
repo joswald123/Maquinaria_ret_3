@@ -41,12 +41,22 @@ public class AdminUserService {
 	
 	// UPDATE CRUD
 	public AdminUser update(AdminUser a) {
-		Optional<AdminUser> adminUserAux = adminuserRepository.getAdminUser(a.getIdAdminUser());
-		if (adminUserAux != null) {
-			return adminuserRepository.update(a);
-		} else {
-			return a;
+		if(a.getIdAdminUser()!=null) {
+			Optional<AdminUser> uAux = adminuserRepository.getAdminUser(a.getIdAdminUser());
+			if(!uAux.isEmpty()) {
+				if(a.getName() != null) {
+					uAux.get().setName(a.getName());
+				}
+				if(a.getEmail() !=null) {
+					uAux.get().setEmail(a.getEmail());
+				}
+				if(a.getPassword() != null) {
+					uAux.get().setPassword(a.getPassword());
+				}
+				return adminuserRepository.save(uAux.get());
+			}
 		}
+		return a;
 	}
 	
 	// DELETE CRUD

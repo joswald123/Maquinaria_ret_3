@@ -49,13 +49,14 @@ public class AdminUserController {
 		
 		// Edit a Score
 		@PutMapping("/update")
-		@ResponseStatus(HttpStatus.ACCEPTED)
+		@ResponseStatus(HttpStatus.CREATED)
 		public 	AdminUser update(@RequestBody AdminUser a) {
 			return adminuserService.update(a);
 		}
 		
 		// Delete a score
 		@DeleteMapping("/{idAdminUser}")
+		@ResponseStatus(HttpStatus.NO_CONTENT)
 		public void delete(@PathVariable("idAdminUser") int id) {
 			adminuserService.delete(id);
 		}

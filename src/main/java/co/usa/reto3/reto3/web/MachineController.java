@@ -45,12 +45,13 @@ public class MachineController {
 	}
 	
 	@PutMapping("/update")
-	@ResponseStatus(HttpStatus.ACCEPTED)
+	@ResponseStatus(HttpStatus.CREATED)
 	public Machine update(@RequestBody Machine m) {
 		return machineService.update(m);
 	}
 	
 	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") int id) {
 		machineService.delete(id);
 	}

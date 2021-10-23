@@ -41,13 +41,28 @@ public class MachineService {
 	
 	// Update CRUD
 	public Machine update(Machine m) {
-		Optional<Machine> maux = machineRepository.getMachine(m.getId());
-		if (maux != null) {
-			return machineRepository.update(m);
-		} else {
-			return m;
+		if(m.getId() != null) {
+			Optional<Machine> mAux=machineRepository.getMachine(m.getId());
+			if(!mAux.isEmpty()) {
+				if(m.getName() != null) {
+					mAux.get().setName(m.getName());
+				}
+				if(m.getBrand() != null) {
+					mAux.get().setBrand(m.getBrand());
+				}
+				if(m.getYear() != null) {
+					mAux.get().setYear(m.getYear());
+				}
+				if(m.getDescription() != null) {
+					mAux.get().setDescription(m.getDescription());
+				}
+				return machineRepository.save(mAux.get());
+			}
+			
 		}
+		return m;
 	}
+	
 
 	
 	// DELETE CRUD

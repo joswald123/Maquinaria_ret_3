@@ -42,12 +42,26 @@ public class ReservationService {
 	
 	// PUT CRUD
 	public Reservation update(Reservation r) {
-		Optional<Reservation> reservationAux = reservationRepository.getReservation(r.getIdReservation());
-		if (reservationAux != null) {
-			return reservationRepository.save(r);
-		} else {
-			return r;
+		if(r.getIdReservation() != null){
+			Optional<Reservation> rAux = reservationRepository.getReservation(r.getIdReservation());
+			if(!rAux.isEmpty()) {
+				if(r.getStartDate() != null) {
+					rAux.get().setStartDate(r.getStartDate());
+				}
+				if(r.getDevolutionDate() != null) {
+					rAux.get().setDevolutionDate(r.getDevolutionDate());
+				}
+				if(r.getScore() != null) {
+					rAux.get().setScore(r.getScore());
+				}
+				if(r.getStatus() != null) {
+					rAux.get().setStatus(r.getStatus());
+				}
+				return reservationRepository.save(rAux.get());
+				
+			}
 		}
+		return r;
 	}
 		
 	

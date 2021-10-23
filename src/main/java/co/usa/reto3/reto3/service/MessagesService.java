@@ -41,12 +41,16 @@ public class MessagesService {
 	
 	// Update CRUD
 	public Message update(Message m) {
-		Optional<Message> messagesAux = messagesRepository.getMessages(m.getIdMessage());
-		if (messagesAux != null) {
-			return messagesRepository.save(m);
-		} else {
-			return m;
+		if(m.getIdMessage() != null) {
+			Optional<Message> mAux = messagesRepository.getMessages(m.getIdMessage());
+			if(!mAux.isEmpty()) {
+				if(m.getMessageText() != null) {
+					mAux.get().setMessageText(m.getMessageText());
+				}
+				return messagesRepository.save(mAux.get());
+			}
 		}
+		return m;
 	}
 	
 	
