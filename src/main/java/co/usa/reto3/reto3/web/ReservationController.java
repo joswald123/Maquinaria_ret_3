@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.usa.reto3.reto3.model.Reservation;
+import co.usa.reto3.reto3.model.custom.CountClient;
+import co.usa.reto3.reto3.model.custom.StatusAmount;
 import co.usa.reto3.reto3.service.ReservationService;
 
 @RestController
@@ -61,4 +63,22 @@ public class ReservationController {
 		reservationService.delete(id);
 	}
 	
+	// GET TopClient List
+	@GetMapping("/report-clients")
+	public List<CountClient> getCountClient(){
+		return reservationService.getTopClient();
+	}
+	
+	//GET Date by period
+	@GetMapping("/report-dates/{dateOne}/{dateTwo}")
+	public List<Reservation> getDatesReport(@PathVariable("dateOne") String date1, @PathVariable("dateTwo") String date2){
+		return reservationService.getReservationByPeriod(date1, date2);
+		
+	}
+	
+	// GET Status
+	@GetMapping("/report-status")
+	public StatusAmount getReservationStatus() {
+		return reservationService.getStatusAmount();
+	}
 }
